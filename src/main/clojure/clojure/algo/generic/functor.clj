@@ -37,3 +37,19 @@
 (defmethod fmap clojure.lang.IPersistentSet
   [f s]
   (into (empty s) (map f s)))
+
+(defmethod fmap clojure.lang.LazySeq
+  [f s]
+  (map f s))
+
+(defmethod fmap java.util.concurrent.Future
+  [f o]
+  (future (f @o)))
+
+(defmethod fmap clojure.lang.Delay
+  [f d]
+  (delay (f @d)))
+
+(defmethod fmap nil
+  [_ _]
+  nil)
