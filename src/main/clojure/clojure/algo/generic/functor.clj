@@ -42,6 +42,10 @@
   [f s]
   (map f s))
 
+(defmethod fmap nil
+  [_ _]
+  nil)
+
 (defmethod fmap java.util.concurrent.Future
   [f o]
   (future (f @o)))
@@ -50,6 +54,4 @@
   [f d]
   (delay (f @d)))
 
-(defmethod fmap nil
-  [_ _]
-  nil)
+
